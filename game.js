@@ -97,8 +97,14 @@ async function init() {
     elements.hintBtn.addEventListener('click', useHint);
     elements.timeExtendBtn.addEventListener('click', useTimeExtend);
 
-    elements.prevBtn.addEventListener('click', () => scrollStages(-1));
-    elements.nextBtn.addEventListener('click', () => scrollStages(1));
+    // 좌우 스크롤 버튼 (클릭 + 터치 대응)
+    const handlePrev = (e) => { e.preventDefault(); scrollStages(-3); };
+    const handleNext = (e) => { e.preventDefault(); scrollStages(3); };
+
+    elements.prevBtn.addEventListener('click', handlePrev);
+    elements.prevBtn.addEventListener('touchstart', handlePrev, { passive: false });
+    elements.nextBtn.addEventListener('click', handleNext);
+    elements.nextBtn.addEventListener('touchstart', handleNext, { passive: false });
 
     elements.stageCardsWrapper.addEventListener('wheel', (e) => {
         e.preventDefault();
@@ -448,10 +454,11 @@ function scrollStages(dir) {
     if (!firstItem) return;
 
     const cardWidth = firstItem.offsetWidth + 40;
-    const totalWidth = config.totalLevels * cardWidth;
+    const totalContentWidth = config.totalLevels * cardWidth + 100;
     const viewWidth = elements.stageCardsWrapper.clientWidth;
-    const maxScroll = Math.max(0, totalWidth - viewWidth + 60);
+    const maxScroll = Math.max(0, totalContentWidth - viewWidth);
 
+    // dir은 이제 카드 개수 단위로 전달됨 (예: 3 또는 -3)
     state.currentStageScroll = Math.min(Math.max(0, state.currentStageScroll + dir * cardWidth), maxScroll);
     updateSliderPosition();
 }

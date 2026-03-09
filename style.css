@@ -1412,6 +1412,14 @@ canvas {
         font-size: 0.9rem;
     }
 
+    /* 화살표 크기 조정 */
+    .slider-arrow {
+        font-size: 4rem;
+        color: #ffcc00;
+        /* 황금색으로 변경하여 시인성 확보 */
+        padding: 0 5px;
+    }
+
     /* 4. Stage Ready */
     #stage-ready-screen {
         padding: 5px 10px;
