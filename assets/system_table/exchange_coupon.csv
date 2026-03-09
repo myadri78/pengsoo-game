@@ -1,0 +1,7 @@
+﻿id,exchange_coupon,exchange_ticket,exchange_sum
+1,coupon_5000_normal,item_ticket,1
+2,coupon_10000_normal,item_ticket,2
+3,coupon_15000_normal,item_ticket,3
+4,coupon_20000_normal,item_ticket,4
+5,coupon_25000_normal,item_ticket,5
+6,coupon_30000_normal,item_ticket,6

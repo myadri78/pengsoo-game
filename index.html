@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>펭수 틀린그림찾기</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <!-- 타이틀 화면 (스플래시) -->
+        <div id="splash-screen" class="screen">
+            <!-- 배경 이펙트 레이어 -->
+            <div class="splash-effects">
+                <div class="effect-burst burst-1"></div>
+                <div class="effect-burst burst-2"></div>
+                <div class="effect-sparkles sparkle-1"></div>
+                <div class="effect-sparkles sparkle-2"></div>
+                <div class="effect-sparkles sparkle-3"></div>
+            </div>
+
+            <div class="splash-deco deco-1"><img src="assets/resources/title/1펭수_어린이집.webp" alt="deco"></div>
+            <div class="splash-deco deco-2"><img src="assets/resources/title/2펭수_편의점.webp" alt="deco"></div>
+            <div class="splash-deco deco-3"><img src="assets/resources/title/3펭수_북극.webp" alt="deco"></div>
+            <div class="splash-deco deco-4"><img src="assets/resources/title/4펭수_캠핑.webp" alt="deco"></div>
+            <div class="splash-deco deco-5"><img src="assets/resources/title/5펭수_할로윈.webp" alt="deco"></div>
+            <div class="splash-deco deco-6"><img src="assets/resources/title/6펭수_놀이터.webp" alt="deco"></div>
+            <div class="splash-deco deco-7"><img src="assets/resources/title/7펭수_tv.webp" alt="deco"></div>
+            <div class="splash-deco deco-8"><img src="assets/resources/title/8펭수_바닷속.webp" alt="deco"></div>
+
+            <div class="splash-content">
+                <h1 class="splash-title">펭수의 틀린그림 찾기</h1>
+                <button id="start-btn" class="splash-start-btn">
+                    시작하기
+                </button>
+            </div>
+        </div>
+
+        <!-- 스테이지 선택 화면 (메인) -->
+        <div id="stage-selection-screen" class="screen hidden">
+            <header class="selection-header">
+                <div class="selection-hud">
+                    <div class="hud-item"><span class="icon">🎫</span><span id="ticket-count">x5</span></div>
+                    <div class="hud-item"><span class="icon">💡</span><span id="select-hint-count">x5</span></div>
+                    <div class="hud-item"><span class="icon">⏰</span><span id="select-time-count">x5</span></div>
+                    <div class="hud-item"><span class="icon">❤️</span><span id="select-life-count">x5</span></div>
+                </div>
+                <div class="close-btn-container">
+                    <button id="close-selection" class="close-btn">&times;</button>
+                </div>
+            </header>
+
+            <h1 class="selection-title">스테이지 난이도를 선택하세요</h1>
+            <div class="stage-slider-container">
+                <button id="prev-stage" class="slider-arrow">&lt;</button>
+                <div class="stage-cards-wrapper">
+                    <div id="stage-cards" class="stage-cards">
+                        <!-- JS에서 동적으로 생성됨 -->
+                    </div>
+                </div>
+                <button id="next-stage" class="slider-arrow">&gt;</button>
+            </div>
+
+            <div class="difficulty-tabs">
+                <button class="diff-tab" data-diff="easy">쉬움</button>
+                <button class="diff-tab active" data-diff="normal">보통</button>
+                <button class="diff-tab" data-diff="hard">어려움</button>
+            </div>
+
+            <footer class="selection-footer">
+                <button id="select-stage-confirm" class="footer-btn primary">스테이지 선택</button>
+                <button class="footer-btn secondary">랭킹 보기</button>
+                <button class="footer-btn secondary">업적 보상</button>
+                <button class="footer-btn secondary">화면 설명</button>
+            </footer>
+        </div>
+
+        <!-- 스테이지 준비 화면 (신규) -->
+        <div id="stage-ready-screen" class="screen hidden">
+            <header class="selection-header">
+                <button id="back-to-selection" class="slider-arrow"
+                    style="font-size: 2.5rem; transform: none;">&lt;</button>
+                <div class="selection-hud">
+                    <div class="hud-item"><span class="icon">🎫</span><span id="ready-ticket-count">x5</span></div>
+                    <div class="hud-item"><span class="icon">💡</span><span id="ready-hint-count">x5</span></div>
+                    <div class="hud-item"><span class="icon">⏰</span><span id="ready-time-count">x5</span></div>
+                    <div class="hud-item"><span class="icon">❤️</span><span id="ready-life-count">x5</span></div>
+                </div>
+                <h1 id="ready-stage-title" style="flex: 2; text-align: center; margin-right: 50px;">스테이지 1</h1>
+            </header>
+
+            <div class="ready-content">
+                <div class="ready-main">
+                    <div class="ready-image-container">
+                        <img id="ready-stage-img" src="" alt="Stage image">
+                        <div id="ready-stars" class="stars-overlay">
+                            <!-- JS에서 동적 별 표시 -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ready-side">
+                    <div class="info-area">
+                        <div class="info-block">
+                            <h3>난이도</h3>
+                            <div id="ready-diff-display" class="info-value">보통</div>
+                        </div>
+                        <div class="info-block">
+                            <h3>달성율</h3>
+                            <div id="attain-stars" class="stars-attain">
+                                <span class="star">★</span><span class="star">☆</span><span class="star">☆</span><span
+                                    class="star">☆</span><span class="star">☆</span>
+                            </div>
+                        </div>
+                        <div class="info-block">
+                            <h3>목표</h3>
+                            <p id="ready-goal-text">제한 시간내에 틀린 그림을 n개 찾기</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ready-footer">
+                <div class="item-shop-row">
+                    <div class="buy-item-card">
+                        <span class="item-name">힌트</span>
+                        <div class="item-icon-box">💡</div>
+                        <button class="buy-btn" data-item="hint">구매</button>
+                    </div>
+                    <div class="buy-item-card">
+                        <span class="item-name">시간연장</span>
+                        <div class="item-icon-box">⏰</div>
+                        <button class="buy-btn" data-item="timeExtend">구매</button>
+                    </div>
+                    <div class="buy-item-card">
+                        <span class="item-name">실수방어</span>
+                        <div class="item-icon-box">❤️</div>
+                        <button class="buy-btn" data-item="defense">구매</button>
+                    </div>
+                    <div class="shop-shortcut">
+                        <span>아이템샵 바로가기</span>
+                        <img src="assets/stage_desing_resources/system_shop_btn.webp"
+                            onerror="this.src='https://placehold.co/100x100?text=SHOP'" alt="Shop">
+                    </div>
+                </div>
+
+                <div class="start-action">
+                    <button id="start-game-btn" class="start-btn-large">
+                        <span class="t1">시작하기</span>
+                        <div class="ticket-cost">
+                            <span class="icon">🎫</span>
+                            <span>x1</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 게임 화면 -->
+        <div id="game-screen" class="screen hidden">
+            <div class="main-play-area">
+                <div class="image-wrapper">
+                    <div class="canvas-container">
+                        <canvas id="base-canvas"></canvas>
+                        <div class="canvas-label">원본</div>
+                    </div>
+                    <div class="canvas-container">
+                        <canvas id="diff-canvas"></canvas>
+                        <div class="canvas-label">틀린 그림</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar Section -->
+            <div class="progress-section">
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                    <div id="timer-bubble" class="timer-bubble">99:99</div>
+                </div>
+            </div>
+
+            <!-- Bottom HUD Section -->
+            <div class="bottom-hud">
+                <div class="hud-left">
+                    <div class="stars">⭐☆☆☆☆</div>
+                    <div class="stage-info">
+                        <span id="level-num">001</span>
+                        <div class="label">스테이지</div>
+                    </div>
+                </div>
+
+                <div class="hud-center-left">
+                    <button id="pause-btn" class="icon-btn">
+                        <div class="pause-icon"></div>
+                        <span>일시 정지</span>
+                    </button>
+                </div>
+
+                <div class="hud-center">
+                    <div id="find-indicators" class="find-indicators">
+                        <!-- JS에서 동적으로 생성될 7개의 원형 인디케이터 -->
+                    </div>
+                    <div id="hearts" class="hearts">
+                        ❤️❤️❤️❤️🖤
+                    </div>
+                </div>
+
+                <div class="hud-right">
+                    <button id="hint-btn" class="item-btn">
+                        <div class="item-icon">💡</div>
+                        <div class="item-label">힌트</div>
+                        <div class="item-count">(3/3)</div>
+                    </button>
+                    <button id="time-extend-btn" class="item-btn">
+                        <div class="item-icon">⏰➕</div>
+                        <div class="item-label">시간연장</div>
+                        <div class="item-count">(3/3)</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 통합 이펙트 & 결과 오버레이 (Effect Overlay) -->
+            <div id="effect-overlay" class="hidden">
+                <div class="effect-backdrop"></div>
+                <div class="effect-container">
+                    <!-- 비디오 제거: 애니메이션으로 대체 -->
+                    <div id="effect-content" class="hidden">
+                        <div id="effect-stars" class="stars-attain"></div>
+                        <h1 id="effect-title">PERFECT!</h1>
+                        <p id="effect-msg">축하합니다! 스테이지 클리어!</p>
+                        <div class="effect-actions">
+                            <button id="retry-btn-overlay" class="res-btn primary">다시 하기</button>
+                            <button id="select-btn-overlay" class="res-btn secondary">스테이지 선택</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+
+</html>

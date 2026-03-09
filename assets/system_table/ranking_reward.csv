@@ -1,0 +1,9 @@
+﻿id,list,level,range_min,range_max,reward,reward_sum
+1,monthly_ranking,hard,1,1,item_ticket,100
+2,monthly_ranking,hard,2,2,item_ticket,50
+3,monthly_ranking,hard,3,3,item_ticket,30
+4,monthly_ranking,hard,4,10,item_ticket,20
+5,monthly_ranking,hard,11,20,item_ticket,15
+6,monthly_ranking,hard,21,50,item_ticket,10
+7,monthly_ranking,hard,51,100,item_ticket,5
+8,monthly_ranking,hard,101,,item_ticket,2

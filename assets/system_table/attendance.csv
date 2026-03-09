@@ -1,0 +1,8 @@
+﻿day,item1,item1_sum,item2,item2_sum,item3,item3_sum
+1,entry_ticket,2,,,,
+2,item_time_ex,3,,,,
+3,item_hint,3,,,,
+4,item_hint,3,,,,
+5,coupon_1000_normal,1,,,,
+6,item_ticket,3,,,,
+7,item_time_ex,3,item_hint,3,coupon_2000_normal,1

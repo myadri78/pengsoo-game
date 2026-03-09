@@ -1,0 +1,1585 @@
+:root {
+    --primary-color: #f7e018;
+    /* 펭수 노란색 */
+    --secondary-color: #333;
+    --accent-color: #ff4757;
+    --bg-color: #f0f2f5;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poor Story', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Splash Screen Styles */
+#splash-screen {
+    background: radial-gradient(circle at center, #f7e018 0%, #ff8c00 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.splash-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.effect-burst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1200px;
+    height: 1200px;
+    transform: translate(-50%, -50%);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+}
+
+.burst-1 {
+    background-image: url('assets/stage_desing_resources/effect_burst_pink.png');
+    animation: rotateClockwise 20s linear infinite;
+}
+
+.burst-2 {
+    background-image: url('assets/stage_desing_resources/effect_burst_yellow.png');
+    animation: rotateCounterClockwise 15s linear infinite;
+    mix-blend-mode: overlay;
+}
+
+.effect-sparkles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    opacity: 0.6;
+}
+
+.sparkle-1 {
+    background-image: url('assets/stage_desing_resources/effect_sparkle_yellow_1.png');
+    animation: slowFloat 8s ease-in-out infinite;
+}
+
+.sparkle-2 {
+    background-image: url('assets/stage_desing_resources/effect_sparkle_yellow_2.png');
+    animation: slowFloat 12s ease-in-out infinite reverse;
+}
+
+.sparkle-3 {
+    background-image: url('assets/stage_desing_resources/effect_sparkle_blue.png');
+    animation: slowFloat 10s ease-in-out infinite;
+    mix-blend-mode: screen;
+}
+
+@keyframes rotateClockwise {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes rotateCounterClockwise {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
+
+@keyframes slowFloat {
+
+    0%,
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.1) translateY(-30px);
+        opacity: 0.8;
+    }
+}
+
+.splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.splash-logo img {
+    width: 450px;
+    /* 로고 크기 확대 */
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.25));
+    animation: floating 3s ease-in-out infinite;
+}
+
+.splash-title {
+    font-size: 4.5rem;
+    color: #fff;
+    font-weight: 900;
+    text-shadow: 0 8px 15px rgba(0, 0, 0, 0.2), 0 0 40px rgba(255, 255, 255, 0.3);
+    letter-spacing: -2px;
+    margin-top: -20px;
+}
+
+.splash-start-btn {
+    padding: 18px 70px;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #1a3c7a;
+    background: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 0 #e6e6e6, 0 20px 40px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s;
+    font-family: inherit;
+    animation: pulse 2s infinite;
+}
+
+.splash-start-btn:active {
+    transform: translateY(8px);
+    box-shadow: 0 2px 0 #e6e6e6, 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Deco Elements */
+.splash-deco {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.splash-deco img {
+    width: 280px;
+    /* 크기 대폭 확대 */
+    height: auto;
+    opacity: 0.5;
+    /* 크기가 커진 만큼 투명도를 살짝 더 낮춤 */
+    border-radius: 15px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+.deco-1 {
+    top: 5%;
+    left: 2%;
+    animation: floating 6s ease-in-out infinite;
+}
+
+.deco-2 {
+    top: 2%;
+    right: 2%;
+    animation: floating 7s ease-in-out infinite reverse;
+}
+
+.deco-3 {
+    bottom: 8%;
+    left: 5%;
+    animation: floating 8s ease-in-out infinite;
+}
+
+.deco-4 {
+    bottom: 2%;
+    right: 5%;
+    animation: floating 6.5s ease-in-out infinite reverse;
+}
+
+.deco-5 {
+    top: 35%;
+    left: -5%;
+    animation: floating 9s ease-in-out infinite;
+}
+
+.deco-6 {
+    top: 30%;
+    right: -5%;
+    animation: floating 7.5s ease-in-out infinite reverse;
+}
+
+.deco-7 {
+    bottom: 35%;
+    left: 2%;
+    animation: floating 8.5s ease-in-out infinite reverse;
+}
+
+.deco-8 {
+    top: 12%;
+    right: 20%;
+    animation: floating 10s ease-in-out infinite;
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(10deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 10px 0 #e6e6e6, 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 10px 0 #e6e6e6, 0 30px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 10px 0 #e6e6e6, 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Play Screen Layout */
+#game-screen {
+    justify-content: flex-start;
+    padding: 0;
+}
+
+.main-play-area {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    padding: 10px;
+}
+
+.image-wrapper {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.canvas-container {
+    background: #fff;
+    border: 1px solid #ddd;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    display: block;
+    max-width: 100%;
+    max-height: calc(100vh - 250px);
+}
+
+/* Progress Section */
+.progress-section {
+    width: 100%;
+    height: 25px;
+    background: #4a2c2a;
+    /* 갈색 배경 */
+    position: relative;
+}
+
+.progress-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #f7e018;
+    /* 펭수 노란색 */
+    width: 100%;
+    transition: width 0.1s linear;
+}
+
+.timer-bubble {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #2d1b1a;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 1px solid #5a3c3a;
+}
+
+/* Bottom HUD */
+.bottom-hud {
+    width: 100%;
+    height: 140px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    border-top: 1px solid #eee;
+}
+
+.hud-left {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stars {
+    color: #ffd700;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.stage-info {
+    text-align: center;
+}
+
+#level-num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #333;
+    line-height: 1;
+}
+
+.stage-info .label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.hud-center-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #333;
+    font-family: inherit;
+}
+
+.pause-icon {
+    width: 45px;
+    height: 45px;
+    background: #f0e1a1;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.pause-icon::before,
+.pause-icon::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 20px;
+    background: #fff;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pause-icon::before {
+    left: 14px;
+}
+
+.pause-icon::after {
+    right: 14px;
+}
+
+.hud-center {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.find-indicators {
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 35px;
+    height: 35px;
+    border: 2px dashed #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.indicator.found {
+    border: 2px solid #ff8c00;
+    color: #ff8c00;
+}
+
+.hearts {
+    font-size: 1.5rem;
+}
+
+.hud-right {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.item-btn {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #333;
+    font-family: inherit;
+}
+
+.item-icon {
+    width: 50px;
+    height: 50px;
+    background: #f0e1a1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 3px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.item-count {
+    color: #666;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.shake {
+    animation: shake 0.2s ease-in-out infinite;
+}
+
+.circle {
+    position: fixed;
+    border: 5px solid #ff4757;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.found-circle {
+    position: absolute;
+    border: 4px solid #ff8c00;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10;
+    background: rgba(255, 140, 0, 0.2);
+    /* 애니메이션은 scale만 사용하도록 조정하여 위치 보존 */
+    animation: popCenter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hint-effect {
+    position: absolute;
+    border: 5px dashed #f7e018;
+    /* 펭수 노란색 */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 15;
+    background: rgba(247, 224, 24, 0.2);
+    transform: translate(-50%, -50%);
+    animation: blink 0.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+.shield-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 20px solid rgba(82, 172, 255, 0.5);
+    box-shadow: inset 0 0 100px rgba(82, 172, 255, 0.3);
+    z-index: 2000;
+    pointer-events: none;
+    animation: shieldFlash 0.5s ease-out;
+}
+
+@keyframes shieldFlash {
+    0% {
+        opacity: 0;
+        filter: brightness(2);
+    }
+
+    50% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes popCenter {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Stage Selection Screen */
+/* Stage Selection Screen */
+/* Stage Selection Screen */
+#stage-selection-screen {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.selection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.selection-hud {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.selection-hud .hud-item {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.selection-hud .icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    margin-right: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.selection-title {
+    font-size: 1.8rem;
+    color: #333;
+    font-weight: 900;
+    text-align: center;
+    margin: 30px 0;
+    /* 제목 위아래 간격 */
+}
+
+/* 2. 스테이지 이미지 영역 */
+.stage-slider-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    /* 이미지와 노출 난이도 사이 간격 */
+}
+
+.slider-arrow {
+    background: none;
+    border: none;
+    font-size: 6rem;
+    color: #eee;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 100;
+    padding: 0 10px;
+}
+
+.slider-arrow:hover {
+    color: #ccc;
+    transform: scale(1.1);
+}
+
+.stage-cards-wrapper {
+    flex: 1;
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.stage-cards {
+    display: flex;
+    gap: 40px;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    padding: 20px 50px;
+}
+
+.stage-card-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.stage-card {
+    width: 420px;
+    height: 240px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.stage-card.selected {
+    border-color: #ffcc00;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+}
+
+.stage-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+}
+
+.stage-card .thumb {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.stage-card .stars-overlay {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    display: flex;
+    gap: 4px;
+}
+
+.stage-card .star {
+    font-size: 1.4rem;
+    color: rgba(200, 200, 200, 0.5);
+    /* 클리어 전: 연한 회색 */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: color 0.3s ease;
+}
+
+.stage-card .star.filled {
+    color: #ffca28;
+    /* 클리어 후: 밝은 노란색 */
+    text-shadow: 0 1px 5px rgba(255, 202, 40, 0.5);
+}
+
+.stage-card-item .stage-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #333;
+}
+
+/* Locked Overlay */
+.stage-card.locked::after {
+    content: attr(data-lock-msg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+    font-weight: 800;
+    color: #333;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    backdrop-filter: blur(2px);
+}
+
+/* 3. 난이도 선택 영역 */
+.difficulty-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    margin-bottom: 40px;
+    /* 탭과 하단 메뉴 사이 간격 */
+}
+
+.diff-tab {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #bbb;
+    cursor: pointer;
+    padding: 5px 15px 10px;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.diff-tab.active {
+    color: #333;
+}
+
+.diff-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 4px;
+    background-color: #ffca28;
+    /* 시안과 일치하는 노란색 */
+    border-radius: 2px;
+}
+
+/* 4. 하단 메뉴 버튼 영역 */
+.selection-footer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding-bottom: 20px;
+}
+
+.footer-btn {
+    padding: 10px 30px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    background: #fff;
+    font-weight: 700;
+    color: #666;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+}
+
+.footer-btn.primary {
+    background-color: #1a3c7a;
+    /* 시안의 진한 네이비 */
+    color: #ffca28;
+    /* 시안의 노란색 텍스트 */
+    border: none;
+    cursor: default;
+    /* 클릭 불가 표시 (카테고리 역할) */
+}
+
+.footer-btn.primary:hover {
+    background-color: #1a3c7a;
+    /* 호버 효과 제거 */
+}
+
+#stage-ready-screen {
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    padding: 1vh 2vw;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.ready-content {
+    flex: 1;
+    display: flex;
+    gap: 2vw;
+    padding: 1vh 0;
+    align-items: center;
+    min-height: 0;
+}
+
+.ready-main {
+    flex: 1.8;
+    background: #fff;
+    border-radius: 20px;
+    padding: 1vh;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ready-image-container {
+    width: 100%;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    max-height: 50vh;
+}
+
+.ready-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ready-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.goal-box h2 {
+    font-size: 1.5rem;
+    color: #444;
+    margin-bottom: 0.5vh;
+}
+
+.stars-attain {
+    display: flex;
+    gap: 0.5vw;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.stars-attain .star {
+    color: #eee;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.stars-attain .star.filled {
+    color: #ffca28;
+    text-shadow: 0 1px 5px rgba(255, 202, 40, 0.5);
+}
+
+.goal-box p {
+    font-size: 1.1rem;
+    color: #888;
+    margin-top: 1vh;
+}
+
+.ready-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5vh 0;
+    border-top: 1px solid #f0f0f0;
+}
+
+.item-shop-row {
+    display: flex;
+    gap: 1.5vw;
+    align-items: center;
+}
+
+.buy-item-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    width: 100px;
+    padding: 1vh 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.buy-item-card .item-name {
+    font-weight: 800;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.item-icon-box {
+    width: 45px;
+    height: 45px;
+    background: #fff5d7;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.buy-btn {
+    width: 100%;
+    background: #ffcc00;
+    border: none;
+    border-radius: 6px;
+    padding: 0.8vh 0;
+    font-weight: 800;
+    color: #333;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.buy-btn:hover {
+    background: #ffb300;
+}
+
+.shop-shortcut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5vh;
+    font-weight: 800;
+    color: #555;
+}
+
+.shop-shortcut img {
+    width: 100px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.shop-shortcut img:hover {
+    transform: scale(1.05);
+}
+
+.start-action {
+    display: flex;
+    align-items: center;
+}
+
+.start-btn-large {
+    background: #ffcc00;
+    border: none;
+    border-radius: 12px;
+    width: 160px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 6px 0 #e6b800;
+}
+
+.start-btn-large:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #e6b800;
+}
+
+.start-btn-large .t1 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #333;
+}
+
+.ticket-cost {
+    background: #fff;
+    border-radius: 8px;
+    padding: 2px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 900;
+    margin-top: 3px;
+    font-size: 0.9rem;
+}
+
+/* Cooldown Overlay (미리 정의) */
+.cooldown-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 900;
+    pointer-events: none;
+}
+
+.close-btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: #bbb;
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1;
+}
+
+
+/* Animation Effects System */
+.effect-text-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6000;
+    pointer-events: none;
+}
+
+.ready-start-text {
+    font-size: 8rem;
+    font-weight: 900;
+    color: #ffcc00;
+    -webkit-text-stroke: 3px #000;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: readyStartAni 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes readyStartAni {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(-10deg);
+        opacity: 0;
+    }
+
+    20% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+.correct-mark {
+    position: absolute;
+    font-size: 5rem;
+    color: #4cd137;
+    font-weight: 900;
+    text-shadow: 0 0 20px rgba(76, 209, 55, 0.8);
+    pointer-events: none;
+    z-index: 20;
+    animation: popAndFade 0.6s ease-out forwards;
+}
+
+.wrong-mark {
+    position: absolute;
+    font-size: 5rem;
+    color: #e84118;
+    font-weight: 900;
+    text-shadow: 0 0 20px rgba(232, 65, 24, 0.8);
+    pointer-events: none;
+    z-index: 20;
+    animation: popAndFade 0.6s ease-out forwards;
+}
+
+@keyframes popAndFade {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -100%) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Effect Overlay (Result State UI) */
+#effect-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+#effect-overlay:not(.hidden) {
+    pointer-events: auto;
+}
+
+.effect-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    transition: background 0.3s;
+    z-index: -1;
+}
+
+.effect-backdrop.transparent {
+    background: rgba(0, 0, 0, 0);
+}
+
+.effect-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#effect-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    z-index: 5002;
+    animation: resultPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes resultPop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#effect-title {
+    font-size: 6rem;
+    font-weight: 900;
+    margin: 20px 0;
+    color: #ffcc00;
+}
+
+#effect-msg {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.effect-actions {
+    display: flex;
+    gap: 30px;
+}
+
+.res-btn {
+    padding: 20px 50px;
+    font-size: 1.8rem;
+    font-weight: 900;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.res-btn.primary {
+    background: #ffcc00;
+    color: #333;
+}
+
+.res-btn.secondary {
+    background: #fff;
+    color: #333;
+}
+
+.res-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+}
+
+.res-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* --- Mobile Landscape Optimization ( orientation: landscape and height <= 600px ) --- */
+@media screen and (orientation: landscape) and (max-height: 600px) {
+
+    /* 1. Global Scaling */
+    html {
+        font-size: 14px;
+        /* 기본 폰트 크기 축소 */
+    }
+
+    #game-container {
+        height: 100vh;
+    }
+
+    /* 2. Splash Screen */
+    .splash-logo img {
+        width: 30vh;
+        /* 높이 비례로 축소 */
+    }
+
+    .splash-title {
+        font-size: 3rem;
+        margin-top: -10px;
+    }
+
+    .splash-start-btn {
+        padding: 10px 40px;
+        font-size: 1.4rem;
+        box-shadow: 0 5px 0 #e6e6e6;
+    }
+
+    /* 3. Stage Selection */
+    .difficulty-tabs {
+        gap: 20px;
+        margin-bottom: 2vh;
+    }
+
+    .diff-tab {
+        font-size: 1.2rem;
+    }
+
+    /* 카드 크기 축소: 420px -> 280px */
+    .stage-card {
+        width: 280px;
+        height: 200px;
+        border-width: 4px;
+    }
+
+    .stage-card-item .stage-title {
+        font-size: 1.1rem;
+    }
+
+    .selection-footer {
+        padding-bottom: 5px;
+        gap: 10px;
+    }
+
+    .footer-btn {
+        padding: 5px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* 4. Stage Ready */
+    #stage-ready-screen {
+        padding: 5px 10px;
+    }
+
+    .ready-header .title-box h1 {
+        font-size: 1.5rem;
+    }
+
+    .ready-content {
+        gap: 10px;
+    }
+
+    .ready-image-container {
+        max-height: calc(100vh - 120px);
+        height: 55vh;
+    }
+
+    .info-area {
+        gap: 1vh;
+    }
+
+    .info-block h3 {
+        font-size: 0.9rem;
+    }
+
+    .info-value,
+    .stars-attain {
+        font-size: 1.3rem;
+    }
+
+    #ready-goal-text {
+        font-size: 0.85rem;
+        padding: 4px 10px;
+    }
+
+    .ready-footer {
+        padding: 5px 0;
+    }
+
+    .item-shop-row {
+        gap: 1vw;
+    }
+
+    .buy-item-card {
+        width: 65px;
+        padding: 4px;
+        gap: 4px;
+    }
+
+    .item-icon-box {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+    }
+
+    .buy-btn {
+        font-size: 0.75rem;
+    }
+
+    .shop-shortcut img {
+        width: 70px;
+    }
+
+    .start-btn-large {
+        width: 130px;
+        height: 55px;
+        box-shadow: 0 4px 0 #e6b800;
+    }
+
+    .start-btn-large .t1 {
+        font-size: 1.1rem;
+    }
+
+    /* 5. Game Screen */
+    .image-wrapper {
+        height: 75vh;
+        gap: 8px;
+        padding: 0 10px;
+    }
+
+    .canvas-container {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    canvas {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .canvas-label {
+        font-size: 0.8rem;
+        padding: 2px 8px;
+        top: 5px;
+    }
+
+    .progress-section {
+        margin: 5px auto;
+        width: 80%;
+    }
+
+    .progress-container {
+        height: 25px;
+    }
+
+    .timer-bubble {
+        padding: 2px 10px;
+        font-size: 0.9rem;
+        top: -12px;
+    }
+
+    .bottom-hud {
+        padding: 2px 2vw;
+    }
+
+    .hud-left {
+        gap: 10px;
+    }
+
+    .profile-info img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .nickname {
+        font-size: 0.8rem;
+    }
+
+    .item-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .item p {
+        font-size: 0.7rem;
+    }
+
+    .count-badge {
+        width: 16px;
+        height: 16px;
+        font-size: 0.65rem;
+    }
+
+    /* 6. Result Overlay / Effects */
+    #effect-title {
+        font-size: 3.5rem;
+        margin: 10px 0;
+    }
+
+    #effect-msg {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+
+    .res-btn {
+        padding: 10px 35px;
+        font-size: 1.3rem;
+        border-radius: 40px;
+        box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    .ready-start-text {
+        font-size: 4.5rem;
+    }
+}

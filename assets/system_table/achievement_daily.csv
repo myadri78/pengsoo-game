@@ -1,0 +1,4 @@
+﻿id,level,txt,stage_range_min,clear_rank,sum,reward,reward_sum
+1,easy,매일 쉬움 스테이지 3개 1성 이상 클리어 시,1,1,1,item_ticket,3
+2,normal,매일 보통 난이도 스테이지 3개  1성 이상 클리어 시,101,1,1,item_ticket,4
+3,hard,매일 어려움 난이도 스테이지 3개  1성 이상 클리어 시,201,1,1,item_ticket,5

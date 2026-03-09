@@ -1,0 +1,9 @@
+﻿package_id,price,price_txt,discount_txt,item1,item1_sum,item2,item2_sum,item3,item3_sum,item4,item4_sum,name,name_txt
+package_def_A,1980,2200,0.1,item_def,3,item_time_ex,1,entry_ticket,1,item_hint,1,,
+package_def_B,4830,6900,0.3,item_def,10,item_time_ex,3,entry_ticket,3,item_hint,3,실수방어 패키지,최대 30%의 할인 혜택을 놓치지 마세요.
+package_time_ex_A,2340,2600,0.1,item_time_ex,3,item_def,1,entry_ticket,1,item_hint,1,,
+package_time_ex_B,5810,8300,0.3,item_time_ex,10,item_def,3,entry_ticket,3,item_hint,3,시간연장패키지,최대 30%의 할인 혜택을 놓치지 마세요.
+package_ticket_A,1980,2200,0.1,entry_ticket,6,item_def,2,item_time_ex,2,item_hint,2,,
+package_ticket_B,4830,6900,0.3,entry_ticket,20,item_def,6,item_time_ex,6,item_hint,6,티켓 패키지,최대 30%의 할인 혜택을 놓치지 마세요.
+package_hint_A,2340,2600,0.1,item_hint,3,entry_ticket,1,item_def,1,item_time_ex,1,,
+package_hint_B,5810,8300,0.3,item_hint,10,entry_ticket,3,item_def,3,item_time_ex,3,힌트 패키지,최대 30%의 할인 혜택을 놓치지 마세요.
