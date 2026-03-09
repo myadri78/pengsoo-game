@@ -1583,3 +1583,60 @@ canvas {
         font-size: 4.5rem;
     }
 }
+
+/* --- Portrait Orientation Warning --- */
+#portrait-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #f7e018;
+    /* 펭수 노랑 */
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #333;
+}
+
+.warning-content {
+    animation: rotateBounce 2s infinite ease-in-out;
+}
+
+.rotate-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+#portrait-warning p {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.4;
+    padding: 0 20px;
+}
+
+@keyframes rotateBounce {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(15deg);
+    }
+}
+
+/* 모바일 세로 모드에서만 경고창 표시 (너비가 높이보다 작을 때) */
+@media screen and (orientation: portrait) and (max-width: 1024px) {
+    #portrait-warning {
+        display: flex;
+    }
+
+    #game-container {
+        display: none !important;
+    }
+}
