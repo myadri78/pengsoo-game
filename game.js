@@ -367,7 +367,7 @@ function renderStageCards() {
     if (state.difficulty === 'normal') startNum = 101;
     else if (state.difficulty === 'hard') startNum = 201;
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < config.totalLevels; i++) {
         const globalNum = startNum + i;
         const localNum = i + 1; // 화면에 표시될 번호 (1-100)
 
@@ -436,7 +436,7 @@ function focusStage(level) {
     const cardCenter = 50 + (index * cardWidth) + (firstItem.offsetWidth / 2);
     let targetScroll = cardCenter - (viewWidth / 2);
 
-    const totalContentWidth = state.totalLevels * cardWidth + 100;
+    const totalContentWidth = config.totalLevels * cardWidth + 100;
     const maxScroll = Math.max(0, totalContentWidth - viewWidth);
 
     state.currentStageScroll = Math.min(Math.max(0, targetScroll), maxScroll);
@@ -448,7 +448,7 @@ function scrollStages(dir) {
     if (!firstItem) return;
 
     const cardWidth = firstItem.offsetWidth + 40;
-    const totalWidth = state.totalLevels * cardWidth;
+    const totalWidth = config.totalLevels * cardWidth;
     const viewWidth = elements.stageCardsWrapper.clientWidth;
     const maxScroll = Math.max(0, totalWidth - viewWidth + 60);
 
