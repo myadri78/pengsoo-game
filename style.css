@@ -1630,8 +1630,8 @@ canvas {
     }
 }
 
-/* 모바일 세로 모드에서만 경고창 표시 (너비가 높이보다 작을 때) */
-@media screen and (orientation: portrait) and (max-width: 1024px) {
+/* 모든 세로 모드(orientation: portrait)에서 경고창 표시 및 게임 차단 */
+@media screen and (orientation: portrait) {
     #portrait-warning {
         display: flex;
     }
