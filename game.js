@@ -495,7 +495,7 @@ function updateSelectionHUD() {
         elements.ticketCount.innerText = 'x5'; // 임시 고정값 (시안용)
         elements.hudHint.innerText = 'x' + settings.item_hint;
         elements.hudTime.innerText = 'x' + settings.item_time_ex;
-        elements.hudLife.innerText = 'x' + config.lives;
+        elements.hudLife.innerText = 'x' + settings.item_def;
     }
 }
 
