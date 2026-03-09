@@ -9,7 +9,7 @@ const config = {
 
 let state = {
     currentLevel: 1,
-    difficulty: 'normal',
+    difficulty: 'easy',
     diffSettings: null,
     rankSettings: null,
     timer: 60,
@@ -335,9 +335,21 @@ function loadLastCleared() {
         elements.diffTabs.forEach(tab => {
             tab.classList.toggle('active', tab.dataset.diff === lastDiff);
         });
+        updateSelectionHUD(); // HUD 정보(아이템 등) 동기화
+    } else {
+        // 데이터가 전혀 없는 경우 (최초 진입) 기본값 명시
+        state.difficulty = 'easy';
+        elements.diffTabs.forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.diff === 'easy');
+        });
+        updateSelectionHUD();
     }
+
     if (lastLevel) {
         state.currentLevel = parseInt(lastLevel);
+    } else {
+        // 최초 진입 시 스테이지 1
+        state.currentLevel = 1;
     }
 }
 
@@ -435,7 +447,7 @@ function focusStage(level) {
     if (!firstItem) return;
 
     const cardWidth = firstItem.offsetWidth + 40; // 아이템 너비 + gap(40)
-    const index = level - 1;
+    const index = (level - 1) % 100; // 난이도별 100개 카드 기준 인덱스 0-99
     const viewWidth = elements.stageCardsWrapper.clientWidth;
 
     // 카드 중앙 자표: 시작패딩(50) + (인덱스 * 간격) + (아이템너비/2)
